@@ -1,11 +1,11 @@
-data "ignition_file" "machine-role" {
-  count      = "${length(var.machine_roles)}"
+data "ignition_file" "static-metrics" {
+  count      = "${length(var.static_metrics)}"
   mode       = 0644
   filesystem = "root"
-  path       = "${var.collector_dir}/${element(keys(var.machine_roles), count.index)}"
+  path       = "${var.collector_dir}/${element(keys(var.static_metrics), count.index)}"
 
   content {
-    content = "${element(values(var.machine_roles), count.index)}"
+    content = "${element(values(var.static_metrics), count.index)}"
   }
 }
 
