@@ -3,14 +3,14 @@ variable "collector_dir" {
   default     = ""
 }
 
-// machine_roles map
+// static_metrics map
 // Should follow the pattern: "filename" = "content"
 // e.t.c.
 // default = {
 //  "machine_role.prom" = "machine_role{role=\"mybox\"} 1\n"
 // }
-variable "machine_roles" {
-  description = "Map of machine roles in the pattern <filename> = <content>"
+variable "static_metrics" {
+  description = "Map of static metrics in the pattern <filename> = <content>"
   type        = "map"
   default     = {}
 }

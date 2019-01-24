@@ -1,6 +1,6 @@
 # tf_node_exporter
 
-This terraform module generates ignition configuration to deploy node-exporter as systemd unit. It supports specifying machine roles via tf maps.
+This terraform module generates ignition configuration to deploy node-exporter as systemd unit. It supports specifying static metrics via tf maps.
 
 ## Input Variables
 
@@ -9,7 +9,7 @@ The input variables are documented in their description and it's best to refer t
 ## Ouputs
 
 - `node_exporter_id` - systemd unit file id
-- `machine_roles_id_list` - list of machine roles file ids
+- `static_metrics_id_list` - list of file ids that contain static metrics definitions
 
 ## Usage
 
@@ -34,7 +34,7 @@ data "ignition_config" "gobgp" {
 
 ```
 
-Using collector and machine roles:
+Using collector and static metrics:
 
 ```hcl
 variable "node-exporter-machine-roles" {
@@ -44,9 +44,9 @@ variable "node-exporter-machine-roles" {
 }
 
 module "node-exporter" {
-  source        = "github.com/utilitywarehouse/tf_node_exporter"
-  collector_dir = "/etc/prom-text-collectors/"
-  machine_roles = "${var.gobgp-node-exporter-machine-roles}"
+  source         = "github.com/utilitywarehouse/tf_node_exporter"
+  collector_dir  = "/etc/prom-text-collectors/"
+  static_metrics = "${var.gobgp-node-exporter-machine-roles}"
 }
 
 data "ignition_config" "gobgp" {
@@ -60,7 +60,7 @@ data "ignition_config" "gobgp" {
     list(
       "${data.ignition_file.some_file.id}",
     ),
-    "${module.node-exporter.machine_roles_id_list}",
+    "${module.node-exporter.static_metrics_id_list}",
   )}"]
 }
 ```
