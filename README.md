@@ -60,7 +60,7 @@ data "ignition_config" "gobgp" {
     list(
       "${data.ignition_file.some_file.id}",
     ),
-    "${module.node-exporter.machine_roles_id_list}",
+    "${module.node-exporter.static_metrics_id_list}",
   )}"]
 }
 ```
