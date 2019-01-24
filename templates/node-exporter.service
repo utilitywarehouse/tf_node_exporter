@@ -14,7 +14,7 @@ ExecStart=/bin/sh -c "\
       --pid=host \
       -v /:/host:ro,rslave \
       ${node_exporter_image_url}:${node_exporter_image_tag} \
-        --path.rootfs /host ${collector_dir == "" ? "" : "--collector.textfile.directory=${collector_dir}"}"
+        --path.rootfs /host ${collector_dir == "" ? "" : "--collector.textfile.directory=/host${collector_dir}"}"
 ExecStop=-/bin/sh -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
 Restart=on-failure
 RestartSec=60
