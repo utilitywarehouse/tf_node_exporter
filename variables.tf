@@ -1,6 +1,6 @@
 variable "collector_dir" {
   description = "Location of the collector directory"
-  default     = ""
+  default     = "/etc/prom-text-collectors/"
 }
 
 // static_metrics map
