@@ -11,7 +11,7 @@ variable "collector_dir" {
 // }
 variable "static_metrics" {
   description = "Map of static metrics in the pattern <filename> = <content>"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
 
