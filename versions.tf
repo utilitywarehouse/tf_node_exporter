@@ -4,8 +4,5 @@ terraform {
     ignition = {
       source = "terraform-providers/ignition"
     }
-    template = {
-      source = "hashicorp/template"
-    }
   }
 }
