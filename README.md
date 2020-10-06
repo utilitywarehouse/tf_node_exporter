@@ -8,8 +8,8 @@ The input variables are documented in their description and it's best to refer t
 
 ## Ouputs
 
-- `node_exporter_id` - systemd unit file id
-- `static_metrics_id_list` - list of file ids that contain static metrics definitions
+- `node_exporter_rendered` - systemd unit file
+- `static_metrics_rendered_list` - list of files that contain static metrics definitions
 
 ## Usage
 
@@ -23,12 +23,12 @@ module "node-exporter" {
 data "ignition_config" "gobgp" {
 
   systemd = [
-    "${data.ignition_systemd_unit.some_unit.id}",
-    "${module.node-exporter.node_exporter_id}",
+    "${data.ignition_systemd_unit.some_unit.rendered}",
+    "${module.node-exporter.node_exporter_rendered}",
   ]
 
   files = [
-      "${data.ignition_file.some_file.id}",
+      "${data.ignition_file.some_file.rendered}",
   ]
 }
 
@@ -52,15 +52,15 @@ module "node-exporter" {
 data "ignition_config" "gobgp" {
 
   systemd = [
-    "${data.ignition_systemd_unit.some_unit.id}",
-    "${module.node-exporter.node_exporter_id}",
+    "${data.ignition_systemd_unit.some_unit.rendered}",
+    "${module.node-exporter.node_exporter_rendered}",
   ]
 
   files = ["${concat(
     list(
-      "${data.ignition_file.some_file.id}",
+      "${data.ignition_file.some_file.rendered}",
     ),
-    "${module.node-exporter.static_metrics_id_list}",
+    "${module.node-exporter.static_metrics_rendered_list}",
   )}"]
 }
 ```
