@@ -1,7 +1,6 @@
 data "ignition_file" "static-metrics" {
   count      = length(var.static_metrics)
   mode       = 420
-  filesystem = "root"
   path       = "${var.collector_dir}/${element(keys(var.static_metrics), count.index)}"
 
   content {
