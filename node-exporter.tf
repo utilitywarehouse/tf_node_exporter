@@ -1,7 +1,9 @@
 data "ignition_file" "static-metrics" {
-  count      = length(var.static_metrics)
-  mode       = 420
-  path       = "${var.collector_dir}/${element(keys(var.static_metrics), count.index)}"
+  count = length(var.static_metrics)
+  mode  = 420
+  # Trim trailing / in collector dir if exists. Otherwise a double slash // will
+  # make terrafrom raise a "path is not simplified" error.
+  path = "${trimsuffix(var.collector_dir, "/")}/${element(keys(var.static_metrics), count.index)}"
 
   content {
     content = element(values(var.static_metrics), count.index)
