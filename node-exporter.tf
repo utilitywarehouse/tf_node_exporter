@@ -13,11 +13,12 @@ data "ignition_file" "static-metrics" {
 data "ignition_systemd_unit" "node-exporter" {
   name = "node-exporter.service"
 
-  content = templatefile("${path.module}/templates/node-exporter.service",
+  content = templatefile("${path.module}/templates/node-exporter.service.tpl",
     {
       node_exporter_image_url = var.node_exporter_image_url
       node_exporter_image_tag = var.node_exporter_image_tag
       collector_dir           = var.collector_dir
+      extra_flags             = var.extra_flags
     }
   )
 }
